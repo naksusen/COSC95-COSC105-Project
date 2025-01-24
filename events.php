@@ -134,5 +134,11 @@ session_start();
             mobileMenu.classList.toggle('hidden');
         });
     </script>
+    <!-- Copyright Footer -->
+    <footer class=" backdrop-blur-md py-4 text-center absolute bottom-0 w-full">
+        <p class="text-gray-800 text-sm">
+            &copy; 2025 G! Arat Na. All Rights Reserved.
+        </p>
+    </footer>
 </body>
 </html>

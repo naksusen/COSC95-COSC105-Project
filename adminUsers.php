@@ -18,7 +18,7 @@ $userQuery = mysqli_query($conn, $userSql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@themesberg/flowbite@latest/dist/flowbite.bundle.js"></script>
-    <title>Pending Payments for <?php echo $eventDetails['title']; ?></title>
+    <title>Users</title>
     <link rel="icon" type="image/x-icon" href="images/G!.png" />
     <link rel="stylesheet" href="table.css" type="text/css">
     <link href="/dist/output.css" rel="stylesheet" />
@@ -42,7 +42,6 @@ $userQuery = mysqli_query($conn, $userSql);
             z-index: 1;
         }
 
-        /* Links inside the dropdown */
         .dropdown-content a {
             color: rgb(67 20 7);
             padding: 12px 16px;
@@ -50,12 +49,10 @@ $userQuery = mysqli_query($conn, $userSql);
             display: block;
         }
 
-        /* Change color of dropdown links on hover */
         .dropdown-content a:hover {
             background-color: #ddd;
         }
 
-        /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
         .show {
             display: block;
         }
@@ -199,9 +196,6 @@ $userQuery = mysqli_query($conn, $userSql);
                     </button>
                 </div>
             </form>
-            <!-- <button class="flex justify-end">
-                <a href="requests.php" class="bg-sky-900 text-slate-50 text-sm leading-5 font-medium rounded-full px-4 py-2 mr-2">Get Report</a>
-            </button> -->
         </div>
         <!-- End of Search and Filter Section -->
 
@@ -217,8 +211,6 @@ $userQuery = mysqli_query($conn, $userSql);
                         <th class="text-[#10182c] font-semibold leading-6">Full Name</th>
                         <th class="text-[#10182c] font-semibold leading-6">Email</th>
                         <th class="text-[#10182c] font-semibold leading-6">Student Number</th>
-                        <!-- <th class="text-[#10182c] font-semibold leading-6">Program</th>
-                        <th class="text-[#10182c] font-semibold leading-6">Year Level</th> -->
                     </tr>
                     <tbody>
                         <?php while ($row = mysqli_fetch_assoc($userQuery)) { ?>
@@ -235,14 +227,22 @@ $userQuery = mysqli_query($conn, $userSql);
         </section>
     </div>
 </section>
+
+<!-- Copyright Footer -->
+<footer class="backdrop-blur-md py-4 text-center">
+    <p class="text-gray-800 text-sm">
+        &copy; 2025 G! Arat Na. All Rights Reserved.
+    </p>
+</footer>
+
 <script src="table.js"></script>
-                <script>
-                  $(document).ready(function() {
+<script>
+  $(document).ready(function() {
     $('#getName').on("keyup", function() {
         var getName = $(this).val();
         $.ajax({
             method: 'POST',
-            url: 'search_users.php', // Create this new PHP file
+            url: 'search_users.php', 
             data: {
                 name: getName
             },
@@ -252,4 +252,7 @@ $userQuery = mysqli_query($conn, $userSql);
         });
     });
 });
-                </script>
+</script>
+</div>
+</body>
+</html>

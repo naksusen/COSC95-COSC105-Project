@@ -100,7 +100,22 @@ if (isset($_POST["submit"])) {
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/3.3.3/adapter.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
     <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
-
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        .content {
+            flex: 1;
+        }
+        footer {
+            flex-shrink: 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -158,7 +173,7 @@ if (isset($_POST["submit"])) {
 
 
     <!-- Content div -->
-    <div class="py-8 px-10 sm:ml-64">
+    <div class="content py-8 px-10 sm:ml-64">
         <!-- Header -->
         <div class="flex w-full items-center justify-between pb-8 gap-5 max-md:max-w-full max-md:flex-wrap">
             <h1 class="text-[#10182c] text-6xl font-bold my-auto">
@@ -334,47 +349,52 @@ if (isset($_POST["submit"])) {
     </div>
     <!-- End of Add Event Form -->
     <script>
-function previewImage(input) {
-    const preview = document.getElementById('imagePreview');
-    const removeButton = document.getElementById('removeButton');
-    const deleteImageInput = document.getElementById('delete_image');
-    const uploadButton = input.closest('label').querySelector('div'); // Get the blue button element
+    function previewImage(input) {
+        const preview = document.getElementById('imagePreview');
+        const removeButton = document.getElementById('removeButton');
+        const deleteImageInput = document.getElementById('delete_image');
+        const uploadButton = input.closest('label').querySelector('div'); // Get the blue button element
 
-    if (input.files && input.files[0]) {
-        const reader = new FileReader();
-        
-        reader.onload = function(e) {
-            preview.src = e.target.result;
-            preview.classList.remove('opacity-50');
-            removeButton.classList.remove('hidden');
-            deleteImageInput.value = "0";
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
             
-            // Change the button text to "Change Poster"
-            uploadButton.textContent = "Change Poster";
-        };
-        
-        reader.readAsDataURL(input.files[0]);
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.classList.remove('opacity-50');
+                removeButton.classList.remove('hidden');
+                deleteImageInput.value = "0";
+                
+                // Change the button text to "Change Poster"
+                uploadButton.textContent = "Change Poster";
+            };
+            
+            reader.readAsDataURL(input.files[0]);
+        }
     }
-}
 
-function removeImage() {
-    const preview = document.getElementById('imagePreview');
-    const removeButton = document.getElementById('removeButton');
-    const fileInput = document.getElementById('image');
-    const deleteImageInput = document.getElementById('delete_image');
-    const uploadButton = fileInput.closest('label').querySelector('div'); // Get the blue button element
+    function removeImage() {
+        const preview = document.getElementById('imagePreview');
+        const removeButton = document.getElementById('removeButton');
+        const fileInput = document.getElementById('image');
+        const deleteImageInput = document.getElementById('delete_image');
+        const uploadButton = fileInput.closest('label').querySelector('div'); // Get the blue button element
 
-    preview.src = 'images/placeholder-image.png';
-    preview.classList.add('opacity-50');
-    removeButton.classList.add('hidden');
-    fileInput.value = '';
-    deleteImageInput.value = "1";
+        preview.src = 'images/placeholder-image.png';
+        preview.classList.add('opacity-50');
+        removeButton.classList.add('hidden');
+        fileInput.value = '';
+        deleteImageInput.value = "1";
 
-    // Change the button text back to "Upload Event Poster"
-    uploadButton.textContent = "Upload Event Poster";
-}
-</script>
+        // Change the button text back to "Upload Event Poster"
+        uploadButton.textContent = "Upload Event Poster";
+    }
+    </script>
 
+    <!-- Copyright Footer -->
+    <footer class="backdrop-blur-md py-4 text-center">
+        <p class="text-gray-800 text-sm">
+            &copy; 2025 G! Arat Na. All Rights Reserved.
+        </p>
+    </footer>
 </body>
-
 </html>

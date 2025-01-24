@@ -31,6 +31,22 @@ $result = mysqli_query($conn, $sql);
     <title>Events</title>
     <link rel="stylesheet" href="gen.css">
     <link rel="icon" type="image/x-icon" href="images/G!.png" />
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        .content {
+            flex: 1;
+        }
+        footer {
+            flex-shrink: 0;
+        }
+    </style>
 </head>
 <body>
     <!-- Gradient Background -->
@@ -65,7 +81,7 @@ $result = mysqli_query($conn, $sql);
     </aside>
 
     <!-- Main Content -->
-    <div class="py-8 px-10 sm:ml-64">
+    <div class="content py-8 px-10 sm:ml-64">
         <!-- Header -->
         <div class="flex w-full items-center justify-between pb-8 gap-5 max-md:max-w-full max-md:flex-wrap">
             <h1 class="text-[#10182c] text-6xl font-bold my-auto">Events</h1>
@@ -126,29 +142,36 @@ $result = mysqli_query($conn, $sql);
         </div>
 
        <!-- JavaScript for Edit and Remove functionalities -->
-<script>
-let currentEventId;
+        <script>
+        let currentEventId;
 
-function editEvent(eventId) {
-window.location.href = 'editEvent.php?event_id=' + eventId;
-}
+        function editEvent(eventId) {
+        window.location.href = 'editEvent.php?event_id=' + eventId;
+        }
 
-function removeEvent(eventId) {
-currentEventId = eventId; // Store the current event ID
-document.getElementById('confirmationModal').classList.remove('hidden'); // Show the modal
-}
+        function removeEvent(eventId) {
+        currentEventId = eventId; // Store the current event ID
+        document.getElementById('confirmationModal').classList.remove('hidden'); // Show the modal
+        }
 
-document.getElementById('cancelButton').onclick = function() {
-document.getElementById('confirmationModal').classList.add('hidden'); // Hide the modal
-};
+        document.getElementById('cancelButton').onclick = function() {
+        document.getElementById('confirmationModal').classList.add('hidden'); // Hide the modal
+        };
 
-document.getElementById('removeButton').onclick = function() {
-if (currentEventId) {
-window.location.href = 'adminEvents.php?remove_event_id=' + currentEventId; // Redirect to remove script
-}
-};
-</script>
-
+        document.getElementById('removeButton').onclick = function() {
+        if (currentEventId) {
+        window.location.href = 'adminEvents.php?remove_event_id=' + currentEventId; // Redirect to remove script
+        }
+        };
+        </script>
+        
     </div>
+
+    <!-- Copyright Footer -->
+    <footer class="backdrop-blur-md py-4 text-center">
+        <p class="text-gray-800 text-sm">
+            &copy; 2025 G! Arat Na. All Rights Reserved.
+        </p>
+    </footer>
 </body>
 </html>
