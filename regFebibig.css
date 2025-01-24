@@ -1,0 +1,46 @@
+/** @format */
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Teko&display=swap");
+
+h1,
+h2,
+h3 {
+  font-family: "Teko", sans-serif;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+}
+
+.formbold-event-details {
+  background: #fafafa;
+  border: 1px solid #dde3ec;
+  border-radius: 5px;
+  margin: 25px 0 30px;
+}
+.formbold-event-details h5 {
+  color: #07074d;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  padding: 15px 25px;
+}
+.formbold-event-details ul {
+  border-top: 1px solid #edeef2;
+  padding: 25px;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 14px;
+}
+.formbold-event-details ul li {
+  color: #536387;
+  font-size: 16px;
+  line-height: 24px;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

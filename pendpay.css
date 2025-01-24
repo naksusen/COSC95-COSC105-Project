@@ -1,0 +1,71 @@
+/** @format */
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Teko&display=swap");
+
+body {
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  color: #10182c;
+}
+
+h1 {
+  font-family: "Teko", sans-serif;
+}
+
+/* Custom thin scrollbar */
+
+::-webkit-scrollbar-thumb {
+  background: #0c4a6e; /* Color of the scrollbar thumb */
+  border-radius: 4px; /* Roundness of the scrollbar thumb */
+  min-height: 10px; /* Height of the scrollbar thumb */
+}
+
+#description::-webkit-scrollbar,
+#addtl_info::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 8px; /* Adjust the width as needed */
+  border-radius: 4px; /* Roundness of the scrollbar */
+}
+
+#description::-webkit-scrollbar-track,
+#addtl_info::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 4px; /* Roundness of the scrollbar track */
+  height: 100%; /* Height of the scrollbar track */
+}
+
+#description::-webkit-scrollbar-thumb,
+#addtl_info::-webkit-scrollbar-thumb {
+  background: #0c4a6e; /* Color of the scrollbar thumb */
+  border-radius: 4px; /* Roundness of the scrollbar thumb */
+}
+
+#description::-webkit-scrollbar-thumb:hover,
+#addtl_info::-webkit-scrollbar-thumb:hover {
+  background: rgb(3, 105, 161);
+  background: linear-gradient(
+    0deg,
+    rgba(3, 105, 161, 1) 0%,
+    rgba(125, 211, 252, 1) 47%,
+    rgba(2, 132, 199, 1) 100%
+  );
+}
+
+/* Thumb styling for body with min-height */
+body::-webkit-scrollbar-thumb {
+  background: #0c4a6e; /* Color of the scrollbar thumb */
+  border-radius: 4px; /* Roundness of the scrollbar thumb */
+  min-height: 20px; /* Minimum height for the scrollbar thumb */
+}
+
+/* Hover effect for body thumb */
+body::-webkit-scrollbar-thumb:hover {
+  background: rgb(3, 105, 161);
+  background: linear-gradient(
+    0deg,
+    rgba(3, 105, 161, 1) 0%,
+    rgba(125, 211, 252, 1) 47%,
+    rgba(2, 132, 199, 1) 100%
+  );
+}

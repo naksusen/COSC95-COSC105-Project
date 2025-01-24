@@ -1,0 +1,13 @@
+/** @format */
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Teko&display=swap");
+
+body {
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  color: #10182c;
+}
+
+h1 {
+  font-family: "Teko", sans-serif;
+}

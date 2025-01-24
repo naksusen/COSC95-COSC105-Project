@@ -1,0 +1,2 @@
+# AratsG
+ Event Registration System
