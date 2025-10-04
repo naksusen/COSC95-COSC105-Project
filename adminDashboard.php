@@ -16,6 +16,7 @@ roleConfirm($_SESSION['logged_in'], $_SESSION['email']);
   <link href="/dist/output.css" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/@themesberg/flowbite@latest/dist/flowbite.bundle.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="gen.css">
   <style>
     html, body {
@@ -44,21 +45,30 @@ roleConfirm($_SESSION['logged_in'], $_SESSION['email']);
   <!-- End of Gradient Background -->
 
   <!-- Sidebar -->
-  <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-    <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+  <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform duration-300 ease-in-out -translate-x-full" aria-label="Sidebar">
+    <div class="h-full px-3 py-4 overflow-y-auto bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 dark:bg-gray-800">
+      <!-- Exit Button -->
+      <div class="flex justify-end mb-2">
+        <button id="sidebar-close" class="p-2 rounded-lg hover:bg-gray-200 transition-colors">
+          <i class="fas fa-times text-gray-600 text-lg"></i>
+        </button>
+      </div>
+      
       <a href="adminDashboard.php" class="flex items-center py-6 ps-8 mb-5">
         <img src="images/G!.png" class="h-6 me-3 sm:h-7" alt="Flowbite Logo" />
         <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">G! Arat Na</span>
       </a>
+      <!-- Divider line -->
+      <div class="border-b border-gray-300 mb-4"></div>
       <ul class="space-y-2 font-medium">
         <li>
-          <a href="adminDashboard.php" class="flex items-center p-2 text-gray-900 rounded-lg bg-gradient-to-l from-red-100 to-sky-700 text-white hover:text-slate-50 hover:bg-sky-900 group">
+          <a href="adminDashboard.php" class="flex items-center p-2 text-gray-900 rounded-lg hover:text-white hover:bg-gradient-to-l from-red-100 to-sky-700 group">
             <img src="images/bxs-home-alt-2.svg" alt="" />
             <span class="ms-3">Dashboard</span>
           </a>
         </li>
         <li>
-          <a href="adminEvents.php" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:text-slate-50 hover:bg-gradient-to-l from-red-100 to-sky-700">
+          <a href="adminEvents.php" class="flex items-center p-2 text-gray-900 rounded-lg hover:text-white hover:bg-gradient-to-l from-red-100 to-sky-700">
             <img src="images/bxs-file.svg" alt="" />
             <span class="flex-1 ms-3 whitespace-nowrap">Events</span>
             <span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-red-100">
@@ -75,7 +85,7 @@ roleConfirm($_SESSION['logged_in'], $_SESSION['email']);
           </a>
         </li>
         <li>
-          <a href="addevent.php" class="flex items-center p-2 text-gray-900 rounded-lg text-white hover:text-slate-50 hover:bg-gradient-to-l from-red-100 to-sky-700 group">
+          <a href="addevent.php" class="flex items-center p-2 text-gray-900 rounded-lg hover:text-white hover:bg-gradient-to-l from-red-100 to-sky-700 group">
             <img src="images/bx-calendar-plus.svg" alt="" />
             <span class="ms-3">Add Event</span>
           </a>
@@ -86,17 +96,23 @@ roleConfirm($_SESSION['logged_in'], $_SESSION['email']);
   <!-- End of Sidebar -->
 
   <!-- Content div -->
-  <div class="content py-8 px-10 sm:ml-64">
+  <div class="content py-8 px-10 transition-all duration-300 ease-in-out" id="main-content">
     <!-- Header -->
     <div class="flex w-full items-center justify-between pb-8 gap-5 max-md:max-w-full max-md:flex-wrap">
-      <h1 class="text-[#10182c] text-6xl font-bold my-auto">
-        Dashboard
-      </h1>
+      <div class="flex items-center gap-4">
+        <!-- Sidebar Toggle Button -->
+        <button id="sidebar-toggle" class="p-2 rounded-lg hover:bg-gray-100 transition-colors hidden">
+          <i class="fas fa-bars text-gray-600 text-xl"></i>
+        </button>
+        <h1 class="text-[#10182c] text-6xl font-bold my-auto">
+          Dashboard
+        </h1>
+      </div>
       <!--Admin Dropdown-->
       <div class="max-w-lg">
-        <button class="text-[#424242] bg-transparent hover:bg-transparent focus:ring-4 focus:ring-transparent font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center" type="button" data-dropdown-toggle="dropdown">
-          Account
-        </button>
+         <button class="text-[#424242] bg-transparent hover:bg-transparent focus:ring-4 focus:ring-transparent font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center" type="button" data-dropdown-toggle="dropdown">
+           Account
+         </button>
         <!-- Dropdown menu -->
         <div class="hidden bg-white text-base z-50 list-none divide-y divide-gray-100 rounded shadow my-4" id="dropdown">
           <div class="px-4 py-3">
@@ -106,13 +122,13 @@ roleConfirm($_SESSION['logged_in'], $_SESSION['email']);
               $sql2 = "Select * from users where email='$email'";
               $result2 = mysqli_query($conn, $sql2);
               $row = mysqli_fetch_assoc($result2);
-              echo '<p>' . $row['fullname'] . '</p>';
+              echo '<p>' . ucfirst($row['fullname']) . '</p>';
             }
             ?>
           </div>
           <ul class="py-1" aria-labelledby="dropdown">
             <li>
-              <a href="login.php" class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">Sign out</a>
+              <a href="login.php" class="text-sm hover:bg-gradient-to-l from-red-100 to-sky-700 hover:text-white text-gray-700 block px-4 py-2 transition-colors">Sign out</a>
             </li>
           </ul>
         </div>
@@ -123,7 +139,7 @@ roleConfirm($_SESSION['logged_in'], $_SESSION['email']);
     <!-- End of Header -->
 
     <!-- Upper Part -->
-    <section class="shadow-lg bg-gray-800 bg-opacity-20 flex flex-col mb-12 px-5 py-9 rounded-3xl max-md:max-w-full max-md:mt-10">
+    <section class="shadow-lg bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 flex flex-col mb-12 px-5 py-9 rounded-3xl max-md:max-w-full max-md:mt-10">
       <div class="flex w-[1-00px] max-w-full gap-2 mx-20 justify-between max-md:flex-wrap max-md:justify-center">
         <div class="flex items-stretch gap-5">
           <button onclick="location.href='adminUsers.php'" class="aspect-square object-contain object-center w-[65px] overflow-hidden shrink-0 max-w-full" style="cursor: pointer;">
@@ -226,12 +242,64 @@ roleConfirm($_SESSION['logged_in'], $_SESSION['email']);
     <!-- End of Events -->
   </div>
 
-  <!-- Copyright Footer -->
-  <footer class="backdrop-blur-md py-4 text-center">
-    <p class="text-gray-800 text-sm">
-      &copy; 2025 G! Arat Na. All Rights Reserved.
-    </p>
-  </footer>
+  <!-- Sidebar Toggle JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const sidebar = document.getElementById('logo-sidebar');
+      const mainContent = document.getElementById('main-content');
+      const toggleButton = document.getElementById('sidebar-toggle');
+      const closeButton = document.getElementById('sidebar-close');
+      const toggleIcon = toggleButton.querySelector('i');
+      
+      // Check if sidebar is collapsed from localStorage, default to closed
+      const isCollapsed = localStorage.getItem('sidebar-collapsed') !== 'false';
+      
+      if (isCollapsed) {
+        // Sidebar is closed
+        sidebar.classList.add('-translate-x-full');
+        mainContent.classList.remove('ml-64');
+        toggleButton.classList.remove('hidden');
+      } else {
+        // Sidebar is open
+        sidebar.classList.remove('-translate-x-full');
+        mainContent.classList.add('ml-64');
+        toggleButton.classList.add('hidden');
+      }
+      
+      // Function to close sidebar
+      function closeSidebar() {
+        sidebar.classList.add('-translate-x-full');
+        mainContent.classList.remove('ml-64');
+        toggleButton.classList.remove('hidden');
+        localStorage.setItem('sidebar-collapsed', 'true');
+      }
+      
+      // Function to open sidebar
+      function openSidebar() {
+        sidebar.classList.remove('-translate-x-full');
+        mainContent.classList.add('ml-64');
+        toggleButton.classList.add('hidden');
+        localStorage.setItem('sidebar-collapsed', 'false');
+      }
+      
+      // Toggle button click handler
+      toggleButton.addEventListener('click', function() {
+        const isCurrentlyCollapsed = sidebar.classList.contains('-translate-x-full');
+        
+        if (isCurrentlyCollapsed) {
+          openSidebar();
+        } else {
+          closeSidebar();
+        }
+      });
+      
+      // Close button click handler
+      closeButton.addEventListener('click', function() {
+        closeSidebar();
+      });
+    });
+  </script>
+
 </body>
 
 </html>

@@ -18,6 +18,7 @@ $userQuery = mysqli_query($conn, $userSql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@themesberg/flowbite@latest/dist/flowbite.bundle.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <title>Users</title>
     <link rel="icon" type="image/x-icon" href="images/G!.png" />
     <link rel="stylesheet" href="table.css" type="text/css">
@@ -68,22 +69,31 @@ $userQuery = mysqli_query($conn, $userSql);
     <!-- End of Gradient Background -->
 
     <!-- Sidebar -->
-    <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-        <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+    <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform duration-300 ease-in-out -translate-x-full" aria-label="Sidebar">
+        <div class="h-full px-3 py-4 overflow-y-auto bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 dark:bg-gray-800">
+            <!-- Exit Button -->
+            <div class="flex justify-end mb-2">
+                <button id="sidebar-close" class="p-2 rounded-lg hover:bg-gray-200 transition-colors">
+                    <i class="fas fa-times text-gray-600 text-lg"></i>
+                </button>
+            </div>
+            
             <a href="adminDashboard.php" class="flex items-center py-6 ps-8 mb-5">
                 <img src="images/G!.png" class="h-6 me-3 sm:h-7" alt="Flowbite Logo" />
                 <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">G! Arat Na</span>
             </a>
+            <!-- Divider line -->
+            <div class="border-b border-gray-300 mb-4"></div>
             <ul class="space-y-2 font-medium">
                 <li>
-                    <a href="adminDashboard.php" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:text-slate-50 hover:bg-gradient-to-l from-red-100 to-sky-700 group">
+                    <a href="adminDashboard.php" class="flex items-center p-2 text-gray-900 rounded-lg hover:text-white hover:bg-gradient-to-l from-red-100 to-sky-700 group">
                         <img src="images/bxs-home-alt-2.svg" alt="" />
                         <span class="ms-3">Dashboard</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="adminEvents.php" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:text-slate-50 hover:bg-gradient-to-l from-red-100 to-sky-700 group">
+                    <a href="adminEvents.php" class="flex items-center p-2 text-gray-900 rounded-lg hover:text-white hover:bg-gradient-to-l from-red-100 to-sky-700 group">
                         <img src="images/bxs-file.svg" alt="" />
                         <span class="flex-1 ms-3 whitespace-nowrap">Events</span>
                         <span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-red-100">
@@ -100,7 +110,7 @@ $userQuery = mysqli_query($conn, $userSql);
                     </a>
                 </li>
                 <li>
-                    <a href="addevent.php" class="flex items-center p-2 text-gray-900 rounded-lg text-white hover:text-slate-50 hover:bg-gradient-to-l from-red-100 to-sky-700 group">
+                    <a href="addevent.php" class="flex items-center p-2 text-gray-900 rounded-lg hover:text-white hover:bg-gradient-to-l from-red-100 to-sky-700 group">
                         <img src="images/bx-calendar-plus.svg" alt="" />
                         <span class="ms-3">Add Event</span>
                     </a>
@@ -122,7 +132,7 @@ $userQuery = mysqli_query($conn, $userSql);
         
         <!-- Camera preview (hidden initially) -->
         <div id="cameraPreview" class="hidden">
-            <h4 class="text-red-100 text-md font-medium mb-4">
+            <h4 class="text-gray-900 text-md font-medium mb-4">
                 Scan QR Code
             </h4>
             <div class="flex justify-center">
@@ -143,12 +153,18 @@ $userQuery = mysqli_query($conn, $userSql);
     <!-- End of Sidebar -->
 
      <!-- Content div -->
-     <div class="py-8 px-10 sm:ml-64">
+     <div class="py-8 px-10 transition-all duration-300 ease-in-out" id="main-content">
         <!-- Header -->
         <div class="flex w-full items-center justify-between pb-8 gap-5 max-md:max-w-full max-md:flex-wrap">
-            <h1 class="text-[#10182c] text-6xl font-bold my-auto">
-            Users
-            </h1>
+            <div class="flex items-center gap-4">
+                <!-- Sidebar Toggle Button -->
+                <button id="sidebar-toggle" class="p-2 rounded-lg hover:bg-gray-100 transition-colors hidden">
+                    <i class="fas fa-bars text-gray-600 text-xl"></i>
+                </button>
+                <h1 class="text-[#10182c] text-6xl font-bold my-auto">
+                Users
+                </h1>
+            </div>
 
 
             <!--Admin Dropdown-->
@@ -173,7 +189,7 @@ $userQuery = mysqli_query($conn, $userSql);
                     <ul class="py-1" aria-labelledby="dropdown">
 
                         <li>
-                            <a href="login.php" class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">Sign out</a>
+                            <a href="login.php" class="text-sm hover:bg-gradient-to-l from-red-100 to-sky-700 hover:text-white text-gray-700 block px-4 py-2 transition-colors">Sign out</a>
                         </li>
                     </ul>
                 </div>
@@ -229,7 +245,7 @@ $userQuery = mysqli_query($conn, $userSql);
 </section>
 
 <!-- Copyright Footer -->
-<footer class="backdrop-blur-md py-4 text-center">
+<footer class="backdrop-blur-md py-4 text-center mt-16">
     <p class="text-gray-800 text-sm">
         &copy; 2025 G! Arat Na. All Rights Reserved.
     </p>
@@ -252,6 +268,143 @@ $userQuery = mysqli_query($conn, $userSql);
         });
     });
 });
+
+// QR Scanner functionality
+let scanner = null;
+let isScanning = false;
+
+function toggleCamera() {
+    const cameraIntro = document.getElementById('cameraIntro');
+    const cameraPreview = document.getElementById('cameraPreview');
+    const preview = document.getElementById('preview');
+    
+    if (!isScanning) {
+        // Start camera
+        Instascan.Camera.getCameras().then(function (cameras) {
+            if (cameras.length > 0) {
+                scanner = new Instascan.Scanner({ 
+                    video: preview,
+                    scanPeriod: 5,
+                    mirror: false 
+                });
+                
+                scanner.addListener('scan', function (content) {
+                    console.log('QR Code scanned:', content);
+                    // Handle the scanned QR code content
+                    handleQRScan(content);
+                });
+                
+                scanner.start(cameras[0]).then(function () {
+                    isScanning = true;
+                    cameraIntro.classList.add('hidden');
+                    cameraPreview.classList.remove('hidden');
+                }).catch(function (e) {
+                    console.error('Error starting camera:', e);
+                    alert('Error starting camera. Please check permissions.');
+                });
+            } else {
+                alert('No cameras found.');
+            }
+        }).catch(function (e) {
+            console.error('Error accessing cameras:', e);
+            alert('Error accessing cameras. Please check permissions.');
+        });
+    } else {
+        // Stop camera
+        if (scanner) {
+            scanner.stop();
+            scanner = null;
+        }
+        isScanning = false;
+        cameraIntro.classList.remove('hidden');
+        cameraPreview.classList.add('hidden');
+    }
+}
+
+function handleQRScan(content) {
+    // Parse the QR code content (assuming it contains registration ID)
+    const registrationId = content.trim();
+    
+    if (registrationId) {
+        // Search for the user with this registration ID
+        $.ajax({
+            method: 'POST',
+            url: 'search_users.php', 
+            data: {
+                registration_id: registrationId
+            },
+            success: function(response) {
+                if (response.trim() !== '') {
+                    $("table").html(response);
+                    // Show success message
+                    alert('Registration found!');
+                } else {
+                    alert('No registration found with ID: ' + registrationId);
+                }
+            },
+            error: function() {
+                alert('Error searching for registration.');
+            }
+        });
+    }
+}
+</script>
+
+<!-- Sidebar Toggle JavaScript -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.getElementById('logo-sidebar');
+        const mainContent = document.getElementById('main-content');
+        const toggleButton = document.getElementById('sidebar-toggle');
+        const closeButton = document.getElementById('sidebar-close');
+        
+        // Check if sidebar is collapsed from localStorage, default to closed
+        const isCollapsed = localStorage.getItem('sidebar-collapsed') !== 'false';
+        
+        if (isCollapsed) {
+            // Sidebar is closed
+            sidebar.classList.add('-translate-x-full');
+            mainContent.classList.remove('ml-64');
+            toggleButton.classList.remove('hidden');
+        } else {
+            // Sidebar is open
+            sidebar.classList.remove('-translate-x-full');
+            mainContent.classList.add('ml-64');
+            toggleButton.classList.add('hidden');
+        }
+        
+        // Function to close sidebar
+        function closeSidebar() {
+            sidebar.classList.add('-translate-x-full');
+            mainContent.classList.remove('ml-64');
+            toggleButton.classList.remove('hidden');
+            localStorage.setItem('sidebar-collapsed', 'true');
+        }
+        
+        // Function to open sidebar
+        function openSidebar() {
+            sidebar.classList.remove('-translate-x-full');
+            mainContent.classList.add('ml-64');
+            toggleButton.classList.add('hidden');
+            localStorage.setItem('sidebar-collapsed', 'false');
+        }
+        
+        // Toggle button click handler
+        toggleButton.addEventListener('click', function() {
+            const isCurrentlyCollapsed = sidebar.classList.contains('-translate-x-full');
+            
+            if (isCurrentlyCollapsed) {
+                openSidebar();
+            } else {
+                closeSidebar();
+            }
+        });
+        
+        // Close button click handler
+        closeButton.addEventListener('click', function() {
+            closeSidebar();
+        });
+    });
 </script>
 </div>
 </body>

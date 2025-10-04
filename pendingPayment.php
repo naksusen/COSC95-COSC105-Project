@@ -78,6 +78,7 @@ $paidQuery = mysqli_stmt_get_result($stmt);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@themesberg/flowbite@latest/dist/flowbite.bundle.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <title>Pending Payments for <?php echo $eventDetails['title']; ?></title>
     <link rel="icon" type="image/x-icon" href="images/G!.png" />
     <link rel="stylesheet" href="table.css" type="text/css">
@@ -131,22 +132,31 @@ $paidQuery = mysqli_stmt_get_result($stmt);
     <!-- End of Gradient Background -->
 
     <!-- Sidebar -->
-    <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-        <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+    <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform duration-300 ease-in-out -translate-x-full" aria-label="Sidebar">
+        <div class="h-full px-3 py-4 overflow-y-auto bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 dark:bg-gray-800">
+            <!-- Exit Button -->
+            <div class="flex justify-end mb-2">
+                <button id="sidebar-close" class="p-2 rounded-lg hover:bg-gray-200 transition-colors">
+                    <i class="fas fa-times text-gray-600 text-lg"></i>
+                </button>
+            </div>
+            
             <a href="adminDashboard.php" class="flex items-center py-6 ps-8 mb-5">
                 <img src="images/G!.png" class="h-6 me-3 sm:h-7" alt="Flowbite Logo" />
                 <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">G! Arat Na</span>
             </a>
+            <!-- Divider line -->
+            <div class="border-b border-gray-300 mb-4"></div>
             <ul class="space-y-2 font-medium">
                 <li>
-                    <a href="adminDashboard.php" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:text-slate-50 hover:bg-gradient-to-l from-red-100 to-sky-700 group">
+                    <a href="adminDashboard.php" class="flex items-center p-2 text-gray-900 rounded-lg hover:text-white hover:bg-gradient-to-l from-red-100 to-sky-700 group">
                         <img src="images/bxs-home-alt-2.svg" alt="" />
                         <span class="ms-3">Dashboard</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="adminEvents.php" class="flex items-center p-2 text-gray-900 rounded-lg bg-gradient-to-l from-red-100 to-sky-700 text-white hover:text-slate-50">
+                    <a href="adminEvents.php" class="flex items-center p-2 text-gray-900 rounded-lg hover:text-white hover:bg-gradient-to-l from-red-100 to-sky-700">
                         <img src="images/bxs-file.svg" alt="" />
                         <span class="flex-1 ms-3 whitespace-nowrap">Events</span>
                         <span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-red-100">
@@ -163,7 +173,7 @@ $paidQuery = mysqli_stmt_get_result($stmt);
                     </a>
                 </li>
                 <li>
-                    <a href="addevent.php" class="flex items-center p-2 text-gray-900 rounded-lg text-white hover:text-slate-50 hover:bg-gradient-to-l from-red-100 to-sky-700 group">
+                    <a href="addevent.php" class="flex items-center p-2 text-gray-900 rounded-lg hover:text-white hover:bg-gradient-to-l from-red-100 to-sky-700 group">
                         <img src="images/bx-calendar-plus.svg" alt="" />
                         <span class="ms-3">Add Event</span>
                     </a>
@@ -185,7 +195,7 @@ $paidQuery = mysqli_stmt_get_result($stmt);
         
         <!-- Camera preview (hidden initially) -->
         <div id="cameraPreview" class="hidden">
-            <h4 class="text-red-100 text-md font-medium mb-4">
+            <h4 class="text-gray-900 text-md font-medium mb-4">
                 Scan QR Code
             </h4>
             <div class="flex justify-center">
@@ -207,12 +217,18 @@ $paidQuery = mysqli_stmt_get_result($stmt);
 
 
     <!-- Content div -->
-    <div class="py-8 px-10 sm:ml-64">
+    <div class="py-8 px-10 transition-all duration-300 ease-in-out" id="main-content">
         <!-- Header -->
         <div class="flex w-full items-center justify-between pb-8 gap-5 max-md:max-w-full max-md:flex-wrap">
+            <div class="flex items-center gap-4">
+                <!-- Sidebar Toggle Button -->
+                <button id="sidebar-toggle" class="p-2 rounded-lg hover:bg-gray-100 transition-colors hidden">
+                    <i class="fas fa-bars text-gray-600 text-xl"></i>
+                </button>
             <h1 class="text-[#10182c] text-6xl font-bold my-auto">
             Pending Payments for <?php echo $eventDetails['title']; ?> 
             </h1>
+            </div>
 
 
             <!--Admin Dropdown-->
@@ -237,7 +253,7 @@ $paidQuery = mysqli_stmt_get_result($stmt);
                     <ul class="py-1" aria-labelledby="dropdown">
 
                         <li>
-                            <a href="login.php" class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">Sign out</a>
+                            <a href="login.php" class="text-sm hover:bg-gradient-to-l from-red-100 to-sky-700 hover:text-white text-gray-700 block px-4 py-2 transition-colors">Sign out</a>
                         </li>
                     </ul>
                 </div>
@@ -253,11 +269,6 @@ $paidQuery = mysqli_stmt_get_result($stmt);
                 <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                 <div class="relative">
                     <input type="search" id="getName" name="name" class="block w-full px-4 py-3 ps-6 text-sm rounded-full bg-sky-900 bg-opacity-10 shadow-md placeholder-gray-400 text-whitefocus:ring-sky-800 focus:border-sky-800" placeholder="Search registrant" required />
-                    <button class="text-slate-50  absolute end-2.5 bottom-[6.25px] hover:bg-gradient-to-tr from-sky-300 to-sky-700 focus:ring-4 focus:outline-none font-medium rounded-full text-sm px-4 py-2 dark:bg-sky-900 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <svg class="w-4 h-4 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                        </svg>
-                    </button>
                 </div>
             </form>
             <!-- <button class="flex justify-end">
@@ -804,8 +815,66 @@ function showModal(data) {
     modal.classList.remove('hidden');
 }
 </script>
+
+<!-- Sidebar Toggle JavaScript -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.getElementById('logo-sidebar');
+        const mainContent = document.getElementById('main-content');
+        const toggleButton = document.getElementById('sidebar-toggle');
+        const closeButton = document.getElementById('sidebar-close');
+        
+        // Check if sidebar is collapsed from localStorage, default to closed
+        const isCollapsed = localStorage.getItem('sidebar-collapsed') !== 'false';
+        
+        if (isCollapsed) {
+            // Sidebar is closed
+            sidebar.classList.add('-translate-x-full');
+            mainContent.classList.remove('ml-64');
+            toggleButton.classList.remove('hidden');
+        } else {
+            // Sidebar is open
+            sidebar.classList.remove('-translate-x-full');
+            mainContent.classList.add('ml-64');
+            toggleButton.classList.add('hidden');
+        }
+        
+        // Function to close sidebar
+        function closeSidebar() {
+            sidebar.classList.add('-translate-x-full');
+            mainContent.classList.remove('ml-64');
+            toggleButton.classList.remove('hidden');
+            localStorage.setItem('sidebar-collapsed', 'true');
+        }
+        
+        // Function to open sidebar
+        function openSidebar() {
+            sidebar.classList.remove('-translate-x-full');
+            mainContent.classList.add('ml-64');
+            toggleButton.classList.add('hidden');
+            localStorage.setItem('sidebar-collapsed', 'false');
+        }
+        
+        // Toggle button click handler
+        toggleButton.addEventListener('click', function() {
+            const isCurrentlyCollapsed = sidebar.classList.contains('-translate-x-full');
+            
+            if (isCurrentlyCollapsed) {
+                openSidebar();
+            } else {
+                closeSidebar();
+            }
+        });
+        
+        // Close button click handler
+        closeButton.addEventListener('click', function() {
+            closeSidebar();
+        });
+    });
+</script>
+
     <!-- Copyright Footer -->
-    <footer class="backdrop-blur-md py-4 text-center mt-10">
+    <footer class="backdrop-blur-md py-4 text-center mt-16">
         <p class="text-gray-800 text-sm">
             &copy; 2025 G! Arat Na. All Rights Reserved.
         </p>
